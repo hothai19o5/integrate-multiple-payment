@@ -1,5 +1,6 @@
 package com.javabuilder.stripe.entity;
 
+import com.javabuilder.stripe.common.Currency;
 import com.javabuilder.stripe.common.PaymentGateway;
 import com.javabuilder.stripe.common.PaymentStatus;
 import jakarta.persistence.*;
@@ -16,8 +17,6 @@ import java.math.BigDecimal;
 @Builder
 public class Payment extends AbstractEntity<Long> {
 
-    private String description;
-
     private String gatewayTransactionId;
 
     @Column(nullable = false)
@@ -27,11 +26,15 @@ public class Payment extends AbstractEntity<Long> {
     @Column(nullable = false)
     private BigDecimal amount;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 }
