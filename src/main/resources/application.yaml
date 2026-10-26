@@ -11,8 +11,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
+
+stripe:
+  api-key: ${STRIPE_API_KEY:sk_test_51T3oI9PT1nQcSGME9U7aghKvKFYdtqupx2WDfjiUBOMZF9eXfAddcOnrKlL5jPyAoT4ZKtvFDwXuEEVW0u0vyQvA002Y9KGFm4}
+  success-url: ${STRIPE_SUCCESS_URL:http://localhost:8080/api/payments/success}
+  cancel-url: ${STRIPE_CANCEL_URL:http://localhost:8080/api/payments/cancel}
